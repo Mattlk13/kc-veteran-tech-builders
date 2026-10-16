@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS projects (id TEXT PRIMARY KEY, name TEXT NOT NULL, description TEXT, status TEXT NOT NULL DEFAULT 'exploratory');
+INSERT OR IGNORE INTO projects(id,name,description) VALUES ('packforge','PackForge','TCG and game testing'),('pbn','Portable Benefits Network','Civic technology'),('generationlink','GenerationLink','Community resource technology'),('forgeai','ForgeAI','AI tools and workflow'),('fieldproof','FieldProof','Job-margin software');
+CREATE TABLE IF NOT EXISTS assignments (id INTEGER PRIMARY KEY AUTOINCREMENT,applicant_id INTEGER NOT NULL REFERENCES interests(id) ON DELETE CASCADE,project_id TEXT NOT NULL REFERENCES projects(id),status TEXT NOT NULL DEFAULT 'invited',notes TEXT,created_at TEXT DEFAULT CURRENT_TIMESTAMP, UNIQUE(applicant_id,project_id));
+CREATE INDEX IF NOT EXISTS assignments_applicant ON assignments(applicant_id);
+CREATE TABLE IF NOT EXISTS audit_log (id INTEGER PRIMARY KEY AUTOINCREMENT,actor TEXT NOT NULL,action TEXT NOT NULL,target_type TEXT NOT NULL,target_id TEXT NOT NULL,created_at TEXT DEFAULT CURRENT_TIMESTAMP);
