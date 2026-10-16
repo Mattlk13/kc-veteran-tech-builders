@@ -1,0 +1,3 @@
+CREATE TABLE IF NOT EXISTS interests (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,email TEXT NOT NULL,area TEXT,role TEXT,level TEXT NOT NULL,interests TEXT NOT NULL,projects TEXT,availability TEXT,consent INTEGER NOT NULL,ip_hash TEXT NOT NULL,created_at TEXT NOT NULL DEFAULT (datetime('now')),status TEXT NOT NULL DEFAULT 'new');
+CREATE INDEX IF NOT EXISTS interests_created ON interests(created_at);
+CREATE INDEX IF NOT EXISTS interests_ip ON interests(ip_hash,created_at);

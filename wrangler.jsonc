@@ -1,0 +1,12 @@
+{
+  "name": "kc-veteran-tech-builders",
+  "main": "src-worker.js",
+  "compatibility_date": "2026-10-16",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "kc-veteran-tech-builders-applicants",
+      "database_id": "5570ef14-8bfe-4efd-9b23-447018bca2f2"
+    }
+  ]
+}
