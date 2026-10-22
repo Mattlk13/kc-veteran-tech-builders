@@ -13,3 +13,7 @@ Veteran-led, civilian-inclusive volunteer technology recruitment site. Built on 
 
 ## Security
 Client input validation plus server validation, origin check, honeypot, rate limit, parameterized SQL and no public data read API. For higher traffic add Cloudflare Turnstile and retention policy.
+
+## Contributing
+
+Start with [the contributor guide](CONTRIBUTING.md) for learning resources, first tasks and local validation. Production operations above are not onboarding steps.
