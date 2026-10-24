@@ -9,6 +9,11 @@ components:
       image: quay.io/devfile/universal-developer-image:ubi9-latest
       memoryLimit: 2Gi
       mountSources: true
+  - name: java25
+    container:
+      image: maven:3.9-eclipse-temurin-25
+      memoryLimit: 2Gi
+      mountSources: true
 commands:
   - id: install-dependencies
     exec:
@@ -23,3 +28,16 @@ commands:
       group:
         kind: test
         isDefault: true
+  - id: java-build
+    exec:
+      component: java25
+      workingDir: ${PROJECT_SOURCE}
+      commandLine: mvn -B -ntp -f training/java/pom.xml package
+      group:
+        kind: build
+        isDefault: true
+  - id: java-smoke-test
+    exec:
+      component: java25
+      workingDir: ${PROJECT_SOURCE}
+      commandLine: java -cp training/java/target/test-classes:training/java/target/classes org.kcveterantechbuilders.SyntheticEventCounterTest
