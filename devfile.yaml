@@ -19,7 +19,7 @@ commands:
     exec:
       component: developer
       workingDir: ${PROJECT_SOURCE}
-      commandLine: "node --check worker.js"
+      commandLine: "node --check src-worker.js"
       group:
         kind: test
         isDefault: true
