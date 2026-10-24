@@ -1,0 +1,33 @@
+name: Java 25 learning validation
+on:
+  pull_request:
+    paths:
+      - 'training/java/**'
+      - '.github/workflows/java-training.yml'
+  push:
+    branches:
+      - 'integration/java-che-netbeans-20261023'
+permissions:
+  contents: read
+jobs:
+  java-training:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+          cache-dependency-path: training/java/pom.xml
+      - name: Build Maven sample for NetBeans
+        run: mvn -B -ntp -f training/java/pom.xml package
+      - name: Run dependency-free synthetic smoke tests
+        run: java -cp training/java/target/test-classes:training/java/target/classes org.kcveterantechbuilders.SyntheticEventCounterTest
+      - name: Inspect JDK internal API usage
+        run: jdeps --jdk-internals training/java/target/classes
+      - name: Scan deprecated JDK APIs
+        run: jdeprscan --release 25 training/java/target/classes
+      - name: Generate Javadoc
+        run: javadoc -quiet -d training/java/target/site/javadoc training/java/src/main/java/org/kcveterantechbuilders/SyntheticEventCounter.java
